@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import React from "react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
+import { Navbar } from "@/components/Navbar";
+
 const inter = Inter({
   subsets: ["latin"],
   preload: true,
@@ -23,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Navbar />
         <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
