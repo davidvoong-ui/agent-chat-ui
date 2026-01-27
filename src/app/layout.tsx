@@ -6,6 +6,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Navbar } from "@/components/Navbar";
 import { UserProvider } from "@/context/UserContext";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <UserProvider>
           <Navbar />
+          <Toaster
+            richColors
+            position="top-right"
+          />
           <NuqsAdapter>{children}</NuqsAdapter>
         </UserProvider>
       </body>
