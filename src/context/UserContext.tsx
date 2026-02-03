@@ -1,12 +1,8 @@
-"use client";
+// src/context/UserContext.ts
+import { createContext } from "react";
+import type { User } from "./UserProvider"; // optional if separated
 
-import { createContext, useContext, useState } from "react";
-
-// Mocking this until the openapi.json is generated
-// TODO
-export type User = { id: number };
-
-type UserContextValue = {
+export type UserContextValue = {
   user?: User;
   actions: {
     setUser: (user?: User) => void;
@@ -15,18 +11,3 @@ type UserContextValue = {
 };
 
 export const UserContext = createContext<UserContextValue | null>(null);
-
-export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>();
-
-  const actions = {
-    setUser,
-    logout: () => setUser(undefined),
-  };
-
-  return (
-    <UserContext.Provider value={{ user, actions }}>
-      {children}
-    </UserContext.Provider>
-  );
-}

@@ -2,22 +2,32 @@
 
 import Button from "@/components/Button";
 import RegistrationForm from "@/features/auth/components/RegistrationForm";
-import { useRegisterUser } from "@/features/auth/hooks/useRegisterUser";
+import { useNewUser } from "@/features/auth/hooks/useNewUser";
+import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export default function Registration() {
-  const { register, isLoading } = useRegisterUser();
+  const { actions: newUserActions } = useNewUser();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (data: { email: string; password: string }) => {
-    const promise = register(data);
+  const handleSubmit = async (user: UserCreate): Promise<NewRegisteredUser> => {
+    setIsLoading(true);
+    const promise = newUserActions.createNewUser(user);
+
     toast.promise(promise, {
       loading: "Creating account…",
       success: "Account created 🎉",
       error: (err) =>
         err instanceof Error ? err.message : "There was an error.",
     });
-    return promise;
+    try {
+      const result = await promise;
+      return result;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

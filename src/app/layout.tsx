@@ -5,7 +5,7 @@ import React from "react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { Navbar } from "@/components/Navbar";
-import { UserProvider } from "@/context/UserContext";
+import { UserProvider } from "@/context/UserProvider";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 

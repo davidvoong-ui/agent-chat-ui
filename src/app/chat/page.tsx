@@ -5,10 +5,10 @@ import { StreamProvider } from "@/providers/Stream";
 import { ThreadProvider } from "@/providers/Thread";
 import { ArtifactProvider } from "@/components/thread/artifact";
 import { Toaster } from "@/components/ui/sonner";
-import React, { use, useEffect } from "react";
+import React, { use } from "react";
 
 // Temporary hack to fix threads
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 //
 
 export default function DemoPage({

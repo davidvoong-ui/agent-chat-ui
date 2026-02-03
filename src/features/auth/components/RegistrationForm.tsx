@@ -3,36 +3,57 @@
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
-import Form, { type FormProps } from "@/components/Form";
-import { FormField } from "@/components/FormField";
-import type { FormErrors } from "@/types/form-errors";
 
-import {
-  RegistrationFields,
-  validateRegistration,
-} from "../validation/validate-registration";
+import Form, { type FormProps } from "@/components/Form";
+import type { FormErrors } from "@/components/FormErrors";
+import { FormField } from "@/components/FormField";
+
+import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
+import { mapFormDataToUserCreate } from "../adapters/mappers";
 
 interface Props extends Omit<FormProps, "onSubmit"> {
   className?: string;
   disabled: boolean;
-  onSubmit: ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => Promise<void>;
+  onSubmit: (useCreate: UserCreate) => Promise<NewRegisteredUser>;
   labelClassName?: string;
   inputClassName?: string;
 }
 
-const validateForm = (form: HTMLFormElement) => {
-  const formData = new FormData(form);
-  return validateRegistration({
-    email: String(formData.get("email")),
-    password: String(formData.get("password")),
-  });
+export type RegistrationFormData = {
+  email: string;
+  password: string;
 };
+
+const INITIAL_REGISTRATION_FORM_DATA = { email: "", password: "" };
+
+function validateForm(
+  formData: RegistrationFormData,
+): FormErrors<RegistrationFormData> {
+  const formErrors: FormErrors<RegistrationFormData> = {};
+  if (!formData.email) {
+    formErrors.email = "Email is required";
+  } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    formErrors.email = "Enter a valid email address";
+  }
+
+  if (!formData.password) {
+    formErrors.password = "Password is required";
+  } else {
+    if (formData.password.length < 8) {
+      formErrors.password = "Password must be at least 12 characters";
+    } else if (!/[A-Z]/.test(formData.password)) {
+      formErrors.password = "Password must contain an uppercase letter";
+    } else if (!/[a-z]/.test(formData.password)) {
+      formErrors.password = "Password must contain a lowercase letter";
+    } else if (!/[0-9]/.test(formData.password)) {
+      formErrors.password = "Password must contain a number";
+    } else if (!/[^\w\s]/.test(formData.password)) {
+      formErrors.password = "Password must contain a special character";
+    }
+  }
+
+  return formErrors;
+}
 
 export default function RegistrationForm({
   className,
@@ -42,13 +63,22 @@ export default function RegistrationForm({
   onSubmit,
   ...rest
 }: Props) {
+  const [formData, setFormData] = useState<RegistrationFormData>(
+    INITIAL_REGISTRATION_FORM_DATA,
+  );
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [errors, setErrors] = useState<FormErrors<RegistrationFields>>({});
+  const [errors, setErrors] = useState<FormErrors<RegistrationFormData>>({});
 
-  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setFormData(INITIAL_REGISTRATION_FORM_DATA);
+  };
+
+  const handleChange = (patch: Partial<RegistrationFormData>) => {
+    setFormData({ ...formData, ...patch });
+
     if (!hasSubmitted) return;
-    const validationErrors = validateForm(e.currentTarget);
-    setErrors(validationErrors);
+
+    setErrors(validateForm(formData));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,22 +88,16 @@ export default function RegistrationForm({
 
     setHasSubmitted(true);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const data = {
-      email: String(formData.get("email")),
-      password: String(formData.get("password")),
-    };
-
-    const validationErrors = validateRegistration(data);
+    const validationErrors = validateForm(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    await onSubmit(data);
+    const userCreate = mapFormDataToUserCreate(formData);
+    await onSubmit(userCreate);
     setHasSubmitted(false);
-    form.reset();
+    resetForm();
     setErrors({});
   };
 
@@ -81,9 +105,7 @@ export default function RegistrationForm({
     <Form
       {...rest}
       className={cn("flex flex-col gap-y-2", className)}
-      onChange={handleChange}
       onSubmit={handleSubmit}
-      noValidate
     >
       <FormField
         label="Email"
@@ -98,7 +120,9 @@ export default function RegistrationForm({
           )}
           name="email"
           type="email"
+          value={formData.email}
           disabled={disabled}
+          onChange={(e) => handleChange({ email: e.target.value })}
         />
       </FormField>
 
@@ -115,7 +139,9 @@ export default function RegistrationForm({
           )}
           name="password"
           type="password"
+          value={formData.password}
           disabled={disabled}
+          onChange={(e) => handleChange({ password: e.target.value })}
         />
       </FormField>
     </Form>
