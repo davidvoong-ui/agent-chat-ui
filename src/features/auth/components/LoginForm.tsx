@@ -25,7 +25,7 @@ const INITIAL_FORM_DATA: LoginFormData = {
 interface Props extends Omit<FormProps, "onSubmit"> {
   className?: string;
   disabled?: boolean;
-  onSubmit: (credentials: LoginCredentials) => Promise<void>;
+  onSubmit: (credentials: LoginCredentials) => Promise<boolean>;
 }
 
 export function LoginForm({
@@ -48,7 +48,9 @@ export function LoginForm({
     if (!canSubmit) return;
 
     const loginCredentials = mapFormDataToLoginCredentials(formData);
-    await onSubmit(loginCredentials);
+    const isSuccessful = await onSubmit(loginCredentials);
+
+    if (!isSuccessful) return;
 
     setFormData(INITIAL_FORM_DATA);
     setShowErrors(false);

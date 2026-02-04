@@ -1,5 +1,8 @@
 import { components } from "@/api/openapi";
 
-export type UserCreateDTO = components["schemas"]["CreateUserRequest"];
-export type NewRegisteredUserDTO = components["schemas"]["UserResponse"];
-export type LoginCredentialsDTO = components["schemas"]["LoginUserRequest"];
+type schemas = components["schemas"];
+
+export type UserCreateDTO = schemas["CreateUserRequest"];
+export type NewRegisteredUserDTO = schemas["UserResponse"];
+export type LoginCredentialsDTO = schemas["LoginUserRequest"];
+export type LoginResponseDTO = schemas["LoginUserResponse"];

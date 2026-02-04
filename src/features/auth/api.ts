@@ -1,8 +1,19 @@
 import { apiFetch } from "@/api/fetcher";
-import { NewRegisteredUserDTO } from "./dtos";
-import { UserCreate, NewRegisteredUser } from "./models";
-import { parseNewRegisteredUserDTO } from "./adapters/parsers";
-import { serializeCreateUser } from "./adapters/serializers";
+import type { LoginResponseDTO, NewRegisteredUserDTO } from "./dtos";
+import type {
+  UserCreate,
+  NewRegisteredUser,
+  LoginCredentials,
+  LoginResponse,
+} from "./models";
+import {
+  parseLoginResponseDTO,
+  parseNewRegisteredUserDTO,
+} from "./adapters/parsers";
+import {
+  serializeCreateUser,
+  serializeLoginCredentials,
+} from "./adapters/serializers";
 
 export async function createNewUser(
   newUser: UserCreate,
@@ -17,4 +28,15 @@ export async function createNewUser(
 
   const newRegisteredUser = parseNewRegisteredUserDTO(newRegisteredUserDTO);
   return newRegisteredUser;
+}
+
+export async function loginUser(
+  loginCredentials: LoginCredentials,
+): Promise<LoginResponse> {
+  const loginResponseDTO = await apiFetch<LoginResponseDTO>("/auth/login", {
+    method: "POST",
+    body: JSON.stringify(serializeLoginCredentials(loginCredentials)),
+  });
+  const loginResponse = parseLoginResponseDTO(loginResponseDTO);
+  return loginResponse;
 }
