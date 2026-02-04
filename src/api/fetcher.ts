@@ -1,3 +1,5 @@
+import { authToken } from "@/features/auth/authToken";
+
 // src/lib/api/fetcher.ts
 const COMPLIANCE_LIVE_API_BASE_URL = (
   process.env.NEXT_PUBLIC_COMPLIANCE_LIVE_API_BASE_URL ?? ""
@@ -13,12 +15,17 @@ export async function apiFetch<T = unknown>(
 ): Promise<T> {
   const url = `${COMPLIANCE_LIVE_API_BASE_URL}${normalizePath(path)}`;
 
-  const headers: HeadersInit = {
-    ...(options.body && typeof options.body === "string"
-      ? { "Content-Type": "application/json" }
-      : {}),
-    ...options.headers,
-  };
+  const headers = new Headers(options.headers);
+
+  // JSON body handling
+  if (options.body && typeof options.body === "string") {
+    headers.set("Content-Type", "application/json");
+  }
+
+  // Auth header injection
+  if (authToken.isSet()) {
+    headers.set("Authorization", `Bearer ${authToken.get()}`);
+  }
 
   const res = await fetch(url, {
     credentials: "include",

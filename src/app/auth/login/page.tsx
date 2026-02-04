@@ -3,6 +3,7 @@
 import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
 import { loginUser } from "@/features/auth/api";
+import { authToken } from "@/features/auth/authToken";
 
 import { LoginForm } from "@/features/auth/components/LoginForm";
 import { LoginCredentials } from "@/features/auth/models";
@@ -18,8 +19,8 @@ export default function Page() {
     setIsLoading(true);
     try {
       const loginResponse = await loginUser(credentials);
-      // TODO: Do something with the access token
-      console.log("loginResponse:", loginResponse);
+      authToken.set(loginResponse.accessToken);
+      // todo: update current user
       return true;
     } catch (error) {
       toast.error("There was an error");
