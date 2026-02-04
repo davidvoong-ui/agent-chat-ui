@@ -31,7 +31,10 @@ export function Navbar({ className }: NavbarProps) {
           {isLoggedIn ? (
             <Link href="/auth/logout">Logout</Link>
           ) : (
-            <Link href="/auth/registration">Registration</Link>
+            <div className="flex gap-1">
+              <Link href="/auth/registration">Registration</Link>|
+              <Link href="/auth/login">Login</Link>
+            </div>
           )}
         </div>
       </div>

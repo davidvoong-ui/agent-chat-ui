@@ -5,42 +5,39 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Form, { type FormProps } from "@/components/Form";
 
-import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
-import { mapFormDataToUserCreate } from "../adapters/mappers";
-
+import { mapFormDataToLoginCredentials } from "../adapters/mappers";
 import { EmailFormField } from "@/components/EmailFormField";
-import { PasswordFormField } from "@/components/PasswordFormField";
+import { LoginPasswordFormField } from "@/components/LoginPasswordFormField";
+import type { LoginCredentials } from "../models";
 
-interface Props extends Omit<FormProps, "onSubmit"> {
-  className?: string;
-  disabled: boolean;
-  onSubmit: (userCreate: UserCreate) => Promise<NewRegisteredUser>;
-}
-
-export type RegistrationFormData = {
+export type LoginFormData = {
   email: string;
   password: string;
 };
 
-const INITIAL_FORM_DATA: RegistrationFormData = {
+const INITIAL_FORM_DATA: LoginFormData = {
   email: "",
   password: "",
 };
 
-export default function RegistrationForm({
+interface Props extends Omit<FormProps, "onSubmit"> {
+  className?: string;
+  disabled?: boolean;
+  onSubmit: (credentials: LoginCredentials) => Promise<void>;
+}
+
+export function LoginForm({
   className,
   disabled = false,
   onSubmit,
   ...rest
 }: Props) {
-  const [formData, setFormData] =
-    useState<RegistrationFormData>(INITIAL_FORM_DATA);
+  const [formData, setFormData] = useState<LoginFormData>(INITIAL_FORM_DATA);
 
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
 
-  const canSubmit = isEmailValid && isPasswordValid && !disabled;
+  const canSubmit = isEmailValid && !disabled;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,8 +45,8 @@ export default function RegistrationForm({
     setShowErrors(true);
     if (!canSubmit) return;
 
-    const userCreate = mapFormDataToUserCreate(formData);
-    await onSubmit(userCreate);
+    const loginCredentials = mapFormDataToLoginCredentials(formData);
+    await onSubmit(loginCredentials);
 
     setFormData(INITIAL_FORM_DATA);
     setShowErrors(false);
@@ -69,13 +66,19 @@ export default function RegistrationForm({
         isShowErrors={showErrors}
       />
 
-      <PasswordFormField
+      <LoginPasswordFormField
         value={formData.password}
         onChange={(password) => setFormData((prev) => ({ ...prev, password }))}
-        onValidityChange={setIsPasswordValid}
         isDisabled={disabled}
-        isShowErrors={showErrors}
       />
+
+      <button
+        type="submit"
+        disabled={!canSubmit}
+        className="mt-4 rounded bg-black px-4 py-2 text-white disabled:opacity-50"
+      >
+        Log in
+      </button>
     </Form>
   );
 }

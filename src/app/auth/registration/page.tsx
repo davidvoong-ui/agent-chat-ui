@@ -1,12 +1,16 @@
 "use client";
 
-import Button from "@/components/Button";
-import RegistrationForm from "@/features/auth/components/RegistrationForm";
-import { useNewUser } from "@/features/auth/hooks/useNewUser";
-import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { cn } from "@/lib/utils";
+import Button from "@/components/Button";
+
+import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
+import { useNewUser } from "@/features/auth/hooks/useNewUser";
+import RegistrationForm from "@/features/auth/components/RegistrationForm";
+import { Container } from "@/components/Container";
+import { Header } from "@/components/Header";
 
 export default function Registration() {
   const { actions: newUserActions } = useNewUser();
@@ -31,10 +35,8 @@ export default function Registration() {
   };
 
   return (
-    <div className="flex flex-col gap-1 p-2">
-      <h1 className="mb-5 text-center text-2xl font-semibold">
-        Create an account
-      </h1>
+    <Container>
+      <Header>Create an account</Header>
 
       <div className="flex flex-col gap-2">
         <RegistrationForm
@@ -58,6 +60,6 @@ export default function Registration() {
           </Button>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
