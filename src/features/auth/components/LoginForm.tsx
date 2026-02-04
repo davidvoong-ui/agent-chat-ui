@@ -9,6 +9,8 @@ import { mapFormDataToLoginCredentials } from "../adapters/mappers";
 import { EmailFormField } from "@/components/EmailFormField";
 import { LoginPasswordFormField } from "@/components/LoginPasswordFormField";
 import type { LoginCredentials } from "../models";
+import { FormRow } from "@/components/FormRow";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export type LoginFormData = {
   email: string;
@@ -72,13 +74,14 @@ export function LoginForm({
         isDisabled={disabled}
       />
 
-      <button
-        type="submit"
-        disabled={!canSubmit}
-        className="mt-4 rounded bg-black px-4 py-2 text-white disabled:opacity-50"
-      >
-        Log in
-      </button>
+      <FormRow>
+        <SubmitButton
+          disabled={!canSubmit}
+          className={cn("col-span-9 col-start-4")}
+        >
+          Log in
+        </SubmitButton>
+      </FormRow>
     </Form>
   );
 }

@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { cn } from "@/lib/utils";
-import Button from "@/components/Button";
-
 import { NewRegisteredUser, UserCreate } from "@/features/auth/models";
 import { useNewUser } from "@/features/auth/hooks/useNewUser";
 import RegistrationForm from "@/features/auth/components/RegistrationForm";
@@ -37,29 +34,10 @@ export default function Registration() {
   return (
     <Container>
       <Header>Create an account</Header>
-
-      <div className="flex flex-col gap-2">
-        <RegistrationForm
-          id="registration-form"
-          disabled={isLoading}
-          onSubmit={handleSubmit}
-        />
-
-        <div className="flex justify-end">
-          <Button
-            className={cn(
-              "bg-green-100",
-              "hover:bg-green-300",
-              "disabled:bg-gray-300 disabled:text-gray-100",
-            )}
-            form="registration-form"
-            type="submit"
-            disabled={isLoading}
-          >
-            Register
-          </Button>
-        </div>
-      </div>
+      <RegistrationForm
+        disabled={isLoading}
+        onSubmit={handleSubmit}
+      />
     </Container>
   );
 }

@@ -10,6 +10,8 @@ import { mapFormDataToUserCreate } from "../adapters/mappers";
 
 import { EmailFormField } from "@/components/EmailFormField";
 import { PasswordFormField } from "@/components/PasswordFormField";
+import { FormRow } from "@/components/FormRow";
+import { SubmitButton } from "@/components/SubmitButton";
 
 interface Props extends Omit<FormProps, "onSubmit"> {
   className?: string;
@@ -76,6 +78,15 @@ export default function RegistrationForm({
         isDisabled={disabled}
         isShowErrors={showErrors}
       />
+
+      <FormRow>
+        <SubmitButton
+          className={cn("col-span-9 col-start-4")}
+          disabled={disabled}
+        >
+          Register
+        </SubmitButton>
+      </FormRow>
     </Form>
   );
 }
