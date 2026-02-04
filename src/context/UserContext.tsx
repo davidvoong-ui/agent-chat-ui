@@ -1,13 +1,13 @@
 // src/context/UserContext.ts
 import { createContext } from "react";
-import type { User } from "./UserProvider"; // optional if separated
+import type { LoginCredentials, User } from "@/features/auth/models";
 
-export type UserContextValue = {
-  user?: User;
+export interface UserContextValue {
+  user: User | null;
   actions: {
-    setUser: (user?: User) => void;
-    logout: () => void;
+    login: (credentials: LoginCredentials) => Promise<void>;
+    logout(): void;
   };
-};
+}
 
 export const UserContext = createContext<UserContextValue | null>(null);

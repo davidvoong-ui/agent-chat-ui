@@ -6,3 +6,4 @@ export type UserCreateDTO = schemas["CreateUserRequest"];
 export type NewRegisteredUserDTO = schemas["UserResponse"];
 export type LoginCredentialsDTO = schemas["LoginUserRequest"];
 export type LoginResponseDTO = schemas["LoginUserResponse"];
+export type UserDTO = schemas["UserMeResponse"];

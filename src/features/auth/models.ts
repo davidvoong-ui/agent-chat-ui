@@ -3,6 +3,7 @@ import type {
   UserCreateDTO,
   NewRegisteredUserDTO,
   LoginResponseDTO,
+  UserDTO,
 } from "@/features/auth/dtos";
 
 export type UserCreate = UserCreateDTO;
@@ -14,4 +15,9 @@ export type LoginResponse = Omit<
 > & {
   accessToken: string;
   tokenType: string;
+};
+export type User = Omit<UserDTO, "is_active" | "is_verified" | "created_at"> & {
+  isActive: boolean;
+  isVerified: boolean;
+  createdAt: Date;
 };

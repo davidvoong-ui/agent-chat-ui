@@ -1,26 +1,28 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
-import { loginUser } from "@/features/auth/api";
-import { authToken } from "@/features/auth/authToken";
 
 import { LoginForm } from "@/features/auth/components/LoginForm";
 import { LoginCredentials } from "@/features/auth/models";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useUser } from "@/hooks/useUser";
 
 export default function Page() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { actions: userActions } = useUser();
 
   const handleSubmit = async (
     credentials: LoginCredentials,
   ): Promise<boolean> => {
     setIsLoading(true);
     try {
-      const loginResponse = await loginUser(credentials);
-      authToken.set(loginResponse.accessToken);
-      // todo: update current user
+      await userActions.login(credentials);
+      router.replace("/"); // replace avoids back button to login
       return true;
     } catch (error) {
       toast.error("There was an error");
