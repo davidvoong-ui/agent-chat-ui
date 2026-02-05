@@ -2,7 +2,7 @@
 
 import { useUser } from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { NavLink } from "./NavLink";
 
 interface NavbarProps {
   className?: string;
@@ -19,21 +19,23 @@ export function Navbar({ className }: NavbarProps) {
       style={{ borderBottom: "1px solid #eee" }}
     >
       <div className="flex h-full grow-1 justify-between gap-1">
-        <div className="flex items-end">
-          <Link href="/">Dashboard</Link>
-          {" | "}
-          <Link href="/chat">Chat</Link>
+        <div className="flex items-end gap-1">
+          <NavLink href="/">Command Center</NavLink>
+          <NavLink href="/changes">Changes</NavLink>
+          <NavLink href="/programmes">Programmes</NavLink>
+          <NavLink href="/reports">Reports</NavLink>
+          <NavLink href="/chat">Chat</NavLink>
         </div>
 
-        <div className="flex items-end text-center text-xl">Horizon Scan</div>
+        {/* <div className="flex items-end text-center text-xl">Horizon Scan</div> */}
 
         <div className="flex items-end">
           {isLoggedIn ? (
-            <Link href="/auth/logout">Logout</Link>
+            <NavLink href="/auth/logout">Logout</NavLink>
           ) : (
             <div className="flex gap-1">
-              <Link href="/auth/registration">Registration</Link>|
-              <Link href="/auth/login">Login</Link>
+              <NavLink href="/auth/registration">Registration</NavLink>
+              <NavLink href="/auth/login">Login</NavLink>
             </div>
           )}
         </div>

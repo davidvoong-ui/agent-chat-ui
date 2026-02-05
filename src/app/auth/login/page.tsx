@@ -25,7 +25,8 @@ export default function Page() {
       router.replace("/"); // replace avoids back button to login
       return true;
     } catch (error) {
-      toast.error("There was an error");
+      toast.error("There was an error.");
+      console.error(error);
       return false;
     } finally {
       setIsLoading(false);
