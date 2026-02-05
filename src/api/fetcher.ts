@@ -28,7 +28,6 @@ export async function apiFetch<T = unknown>(
   }
 
   const res = await fetch(url, {
-    credentials: "include",
     ...options,
     headers,
   });
