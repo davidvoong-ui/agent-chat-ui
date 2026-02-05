@@ -12,7 +12,7 @@ export default function Button({ className, ...rest }: ButtonProps) {
         "cursor-pointer rounded border border-gray-300 p-3",
         "bg-green-200",
         "hover:bg-green-300",
-        "disabled:bg-gray-300 disabled:text-gray-100",
+        "disabled:bg-gray-100 disabled:text-gray-400",
         className,
       )}
     />
