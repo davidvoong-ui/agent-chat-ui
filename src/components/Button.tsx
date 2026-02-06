@@ -14,6 +14,7 @@ export default function Button({ className, ...rest }: ButtonProps) {
         "hover:bg-slate-700 active:bg-slate-800",
         "transition-colors",
         "disabled:cursor-not-allowed disabled:opacity-50",
+        "cursor-pointer",
         className,
       )}
     />

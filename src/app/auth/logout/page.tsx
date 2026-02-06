@@ -11,7 +11,7 @@ export default function Page() {
 
   useEffect(() => {
     userActions.logout();
-    router.replace("/auth/login");
+    router.replace("/");
   }, [userActions, router]);
 
   return null;

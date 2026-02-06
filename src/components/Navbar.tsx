@@ -7,6 +7,7 @@ import { useUser } from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
 import { NavLink } from "./NavLink";
 import Button from "./Button";
+import { useAuthModal } from "@/features/context/AuthModalContext";
 
 interface NavbarProps {
   className?: string;
@@ -24,6 +25,7 @@ const LEFT_NAV_LINKS = [
 export function Navbar({ className }: NavbarProps) {
   const pathname = usePathname();
   const { user } = useUser();
+  const { open: openAuthModal } = useAuthModal();
 
   const [isLeftOpen, setIsLeftOpen] = useState(false);
   const [isRightOpen, setIsRightOpen] = useState(false);
@@ -114,20 +116,22 @@ export function Navbar({ className }: NavbarProps) {
             </NavLink>
           ) : (
             <>
-              <NavLink
-                href="/auth/registration"
-                isSelected={isSelected("/auth/registration", true)}
-                onClick={closeMenus}
+              <Button
+                onClick={() => {
+                  openAuthModal("register");
+                  closeMenus();
+                }}
               >
                 Registration
-              </NavLink>
-              <NavLink
-                href="/auth/login"
-                isSelected={isSelected("/auth/login", true)}
-                onClick={closeMenus}
+              </Button>
+              <Button
+                onClick={() => {
+                  openAuthModal("login");
+                  closeMenus();
+                }}
               >
                 Login
-              </NavLink>
+              </Button>
             </>
           )}
         </div>

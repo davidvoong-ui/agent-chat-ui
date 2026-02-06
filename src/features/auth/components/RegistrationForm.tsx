@@ -15,7 +15,7 @@ import { SubmitButton } from "@/components/SubmitButton";
 
 interface Props extends Omit<FormProps, "onSubmit"> {
   className?: string;
-  disabled: boolean;
+  disabled?: boolean;
   onSubmit: (userCreate: RegistrationInput) => Promise<RegisteredUser>;
 }
 
