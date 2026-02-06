@@ -16,6 +16,7 @@ interface NavbarProps {
 const LEFT_NAV_LINKS = [
   { href: "/command-center", label: "Command Center", exact: true },
   { href: "/changes", label: "Changes" },
+  { href: "/signals", label: "Signals" },
   { href: "/programmes", label: "Programmes" },
   { href: "/work", label: "Work" },
   { href: "/reports", label: "Reports" },

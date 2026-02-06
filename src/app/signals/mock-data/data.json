@@ -1,0 +1,137 @@
+[
+  {
+    "id": "adf320c9-cb1d-4c13-8c10-99bb517a83e5",
+    "title": "New Residency Verification Requirements under Spain-UK Double Taxation Agreement",
+    "object_type": "Change Event",
+    "type": "Amendment",
+    "temporal": "Pending",
+    "normalized_status": "New",
+    "sop": "sop",
+    "certainty": 1,
+    "magnitude": 0.8,
+    "riskRag": "Red",
+    "readinessScore": 0,
+    "description": "The Spain-UK Double Taxation Agreement has introduced new residency verification requirements for individuals claiming tax residency in Spain. Effective immediately, individuals must physically reside in Spain for at least 256 days per calendar year to qualify as residents under the DTA. To substantiate residency claims, individuals must provide daily proof of presence in Spain through specific documentation. This includes daily transaction records from Greegs Grocery and daily photographs of themselves walking their dog in a public location, both with time-stamp and geolocation data. These requirements aim to prevent abuse of tax treaty benefits and ensure compliance with residency criteria.",
+    "source": "6cc84d19-eed3-4ebc-b865-8cf8494756f1",
+    "sources": [
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      }
+    ],
+    "tags": [
+      "Taxation",
+      "Residency Verification",
+      "Spain-UK DTA",
+      "Compliance",
+      "Cross-Border Taxation",
+      "HM Revenue & Customs",
+      "Spanish Tax Agency",
+      "Double Taxation",
+      "Operational Impact",
+      "Documentation Requirements"
+    ],
+    "obligations": [
+      "Individuals claiming Spanish tax residency must reside in Spain for at least 256 days per year.",
+      "Submit daily transaction records from Greegs Grocery as proof of presence in Spain.",
+      "Provide daily photographs of dog-walking activities with time-stamp and geolocation data.",
+      "Compile and submit all evidence digitally to the relevant tax authority with a signed declaration.",
+      "Ensure compliance with the new residency verification requirements to avoid being classified as non-resident."
+    ],
+    "signal_metadata": {
+      "signal_pipeline_version": "0.1"
+    },
+    "created_at": "2026-01-02T21:41:02.855509Z",
+    "updated_at": "2026-01-02T21:41:02.855509Z"
+  },
+  {
+    "id": "024cc0d0-45b1-4932-8245-9de5706f083a",
+    "title": "New Residency Verification Requirements under Spain-UK Double Taxation Agreement",
+    "object_type": "Change Event",
+    "type": "Amendment",
+    "temporal": "Pending",
+    "normalized_status": "New",
+    "sop": "sop",
+    "certainty": 1,
+    "magnitude": 0.8,
+    "riskRag": "Red",
+    "readinessScore": 0,
+    "description": "The recent update to the Spain-UK Double Taxation Agreement introduces stringent residency verification requirements for individuals claiming tax residency in Spain. Effective immediately, individuals must physically reside in Spain for at least 256 days per calendar year to qualify as residents under the DTA. To substantiate this residency claim, individuals are required to provide daily evidence of their presence in Spain. This includes submitting daily transaction records from Greegs Grocery and daily photographs of themselves walking their dog in a public location, both with verifiable date, time, and location data. These changes are designed to prevent abuse of tax treaty benefits and ensure accurate residency claims.",
+    "source": "509da8cf-0481-4bec-9812-3e2c93acb1df",
+    "sources": [
+      {
+        "id": "faac4b22-4398-48b8-a014-b46fbbda9b80"
+      },
+      {
+        "id": "f4fe5b73-0ed4-432d-afac-5ae09f1075f3"
+      }
+    ],
+    "tags": [
+      "Double Taxation",
+      "Residency Verification",
+      "Tax Compliance",
+      "Spain",
+      "United Kingdom",
+      "Cross-Border Taxation",
+      "HM Revenue & Customs",
+      "Spanish Tax Agency",
+      "Reporting Requirements",
+      "Fiscal Evasion Prevention"
+    ],
+    "obligations": [
+      "Individuals claiming Spanish tax residency must reside in Spain for at least 256 days per year.",
+      "Submit daily transaction records from Greegs Grocery as proof of presence in Spain.",
+      "Provide daily photographs of dog-walking activities with time-stamp and geolocation data.",
+      "Compile and submit all evidence digitally to the relevant tax authority with a signed declaration.",
+      "Ensure compliance with the new residency verification requirements to avoid penalties and loss of tax treaty benefits."
+    ],
+    "signal_metadata": {
+      "signal_pipeline_version": "0.1"
+    },
+    "created_at": "2026-01-12T20:57:40.622430Z",
+    "updated_at": "2026-01-12T20:57:40.622430Z"
+  },
+  {
+    "id": "63744506-65eb-46d4-b4bd-6e209d20fc21",
+    "title": "Clarification of Tax Residency Criteria under UK-Spain Double Taxation Agreement",
+    "object_type": "Change Event",
+    "type": "Amendment",
+    "temporal": "Pending",
+    "normalized_status": "New",
+    "sop": "sop",
+    "certainty": 1,
+    "magnitude": 0.5,
+    "riskRag": "Amber",
+    "readinessScore": 0,
+    "description": "The recent update to the Spain–United Kingdom Double Taxation Agreement (DTA) involves a clarification of the criteria used to determine tax residency status for individuals. This change affects how individuals can seek relief from double taxation between the UK and Spain. The update specifically addresses the conditions under which an individual is considered a resident of one or both contracting states, impacting Articles related to residency criteria and the elimination of double taxation. This clarification is crucial for ensuring accurate tax reporting and compliance with the DTA's provisions, thereby preventing fiscal evasion and ensuring proper tax liabilities are met in the respective jurisdictions.",
+    "source": "ef2bf257-01ef-437e-bdcd-d7d80dd17aa4",
+    "sources": [
+      {
+        "id": "dfc7793d-c971-4782-b220-5d109aab0fef"
+      }
+    ],
+    "tags": [
+      "Taxation",
+      "Double Taxation Agreement",
+      "UK-Spain",
+      "Residency Criteria",
+      "Compliance",
+      "Tax Reporting",
+      "Fiscal Evasion",
+      "HM Revenue & Customs"
+    ],
+    "obligations": [
+      "Review and update internal tax residency assessment procedures to align with the clarified criteria under the DTA.",
+      "Ensure that tax reporting systems are adjusted to reflect the updated residency criteria for individuals operating between the UK and Spain.",
+      "Provide training to compliance and tax personnel on the updated residency determination criteria to ensure accurate application in tax filings.",
+      "Communicate the changes to affected individuals and entities to ensure they understand the implications for their tax obligations."
+    ],
+    "signal_metadata": {
+      "signal_pipeline_version": "0.1"
+    },
+    "created_at": "2026-01-13T13:31:18.648195Z",
+    "updated_at": "2026-01-13T13:31:18.648195Z"
+  }
+]
