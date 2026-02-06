@@ -2,11 +2,17 @@ import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
 import { Panel } from "@/components/Panel";
 
-export default function Page({ params }: { params: { id: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
   return (
     <Container>
       <Panel>
-        <Header className="mb-0 flex">Changes {params.id}</Header>
+        <Header className="mb-0 flex">Changes {id}</Header>
       </Panel>
 
       <div className="grid grid-cols-12 gap-2">
