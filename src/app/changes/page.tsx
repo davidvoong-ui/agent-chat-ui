@@ -1,6 +1,29 @@
 import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
+import { List } from "@/components/List";
+import { ListItem } from "@/components/ListItem";
 import { Panel } from "@/components/Panel";
+import Link from "next/link";
+
+const CHANGES_MOCK = [
+  {
+    name: "Change 1",
+    id: 1,
+  },
+
+  {
+    name: "Change 2",
+    id: 2,
+  },
+  {
+    name: "Change 3",
+    id: 3,
+  },
+  {
+    name: "Change 4",
+    id: 4,
+  },
+];
 
 export default function Page() {
   return (
@@ -10,23 +33,20 @@ export default function Page() {
       </Panel>
 
       <div className="grid grid-cols-12 gap-2">
-        <div className="col-span-12 flex flex-col gap-2 md:col-span-3">
-          <Panel>Review Sections</Panel>
-        </div>
-
-        <div className="col-span-12 flex flex-col gap-2 md:col-span-6">
-          <Panel>Summary Strip</Panel>
-          <Panel>Provenance and what changed</Panel>
-          <Panel>Why it matters</Panel>
-          <Panel>Program and Stance Impact</Panel>
-          <Panel>Obligations and Execution Implications</Panel>
-        </div>
-
-        <div className="col-span-12 flex flex-col gap-2 md:col-span-3">
-          <Panel>Triage Decision</Panel>
-          <Panel>Agent Evidence</Panel>
-          <Panel>Activity</Panel>
-        </div>
+        <Panel className="col-span-12">
+          <List>
+            {CHANGES_MOCK.map((change) => (
+              <ListItem key={change.id}>
+                <Link
+                  className="block w-full"
+                  href={`/changes/${change.id}`}
+                >
+                  {change.name}
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        </Panel>
       </div>
     </Container>
   );
